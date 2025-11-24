@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Firestore</title>
+    <link rel="manifest" href="manifest.json"> 
+    <style>
+        body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+        h2 { border-bottom: 2px solid #ccc; padding-bottom: 5px; }
+        input[type="text"], textarea { width: 100%; padding: 10px; margin-bottom: 10px; box-sizing: border-box; }
+        button { padding: 10px 15px; background-color: #3367D6; color: white; border: none; cursor: pointer; }
+        .note { border: 1px solid #eee; padding: 15px; margin-top: 10px; border-radius: 5px; }
+        .note h3 { margin-top: 0; color: #3367D6; }
+    </style>
+</head>
+<body>
+    <h1>📝 PWA Notes avec Firestore</h1>
+    
+    <form id="note-form">
+        <input type="text" id="note-title" placeholder="Titre de la note" required>
+        <textarea id="note-content" placeholder="Contenu de la note" required></textarea>
+        <button type="submit">Ajouter la Note</button>
+    </form>
+    
+    <h2>Notes Enregistrées</h2>
+    <div id="notes-list">
+        <p>Chargement des notes...</p>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    
+    <script src="app.js"></script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js') 
+                    .then(reg => console.log('SW enregistré'))
+                    .catch(err => console.error('Erreur SW:', err));
+            });
+        }
+    </script>
+</body>
+</html>
